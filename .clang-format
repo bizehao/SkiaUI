@@ -1,0 +1,135 @@
+﻿# Note that we don't specify the language in this file because some files are
+# detected as Cpp, but others are detected as ObjC and we want this formatting
+# to apply to all types of files.
+BasedOnStyle: LLVM
+AccessModifierOffset: -2
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: AcrossEmptyLines
+AlignConsecutiveBitFields: AcrossEmptyLines
+AlignConsecutiveMacros: AcrossEmptyLines
+AlignEscapedNewlines: Left
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 1
+AlignOperands: AlignAfterOperator
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: Yes
+AttributeMacros: [
+                  'USTDEX_API',
+                  'USTDEX_HOST_API',
+                  'USTDEX_DEVICE_API',
+                  'USTDEX_TRIVIAL_API',
+                  'USTDEX_TRIVIAL_HOST_API',
+                  'USTDEX_TRIVIAL_DEVICE_API',
+                  'USTDEX_NO_UNIQUE_ADDRESS',
+                  'USTDEX_TYPE_VISIBILITY_DEFAULT',
+                  'USTDEX_ATTR_NODEBUG_ALIAS',
+                  'USTDEX_HOST_DEVICE',
+                 ]
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+BreakBeforeConceptDeclarations: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+ColumnLimit: 120
+CompactNamespaces: false
+ContinuationIndentWidth: 2
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+FixNamespaceComments: true
+IndentWrappedFunctionNames: false
+IncludeBlocks:   Regroup
+IncludeCategories:
+  - Regex:           '^"prologue[.]hpp"$'
+    Priority:            0x7FFFFFFF
+    SortPriority:        0x7FFFFFFF
+  - Regex:           '^"config[.]hpp"$'
+    Priority:            0
+    SortPriority:        0
+  - Regex:           '^<cub/'
+    Priority:            2
+    SortPriority:        1
+  - Regex:           '^<thrust/'
+    Priority:            3
+    SortPriority:        2
+  - Regex:           '^<cuda/'
+    Priority:            4
+    SortPriority:        3
+  - Regex:           '^<[a-z_]*>$'
+    Priority:            5
+    SortPriority:        4
+  - Regex:           '^"[a-z_]*[.]hpp"$'
+    Priority:            0
+    SortPriority:        0
+InsertBraces: true
+IndentCaseLabels: true
+InsertNewlineAtEOF: true
+InsertTrailingCommas: Wrapped
+IndentRequires: true
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+Macros:
+  - USTDEX_TEMPLATE(...)=template<__VA_ARGS__>
+  - USTDEX_REQUIRES(...)=requires (__VA_ARGS__)
+  - USTDEX_CONCEPT=concept /*****/
+NamespaceIndentation: None
+PackConstructorInitializers: Never
+PenaltyBreakAssignment: 30
+PenaltyBreakBeforeFirstCallParameter: 50
+PenaltyBreakComment: 0
+PenaltyBreakFirstLessLess: 0
+PenaltyBreakString: 70
+PenaltyBreakTemplateDeclaration: 0
+PenaltyExcessCharacter: 100
+PenaltyReturnTypeOnItsOwnLine: 90
+PenaltyIndentedWhitespace: 2
+PointerAlignment: Left
+ReflowComments: true
+RemoveSemicolon: false
+SortIncludes: CaseInsensitive
+SpaceAfterCStyleCast: true
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: Never
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+Standard: c++20
+TabWidth: 4
+UseTab: Never
