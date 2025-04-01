@@ -70,18 +70,20 @@ void registration_skiaui_impl(std::string_view class_name, Pair... props)
     }
 }
 
-template <typename Clazz, bool CanInstance = true, is_prop_t... Props>
-void registration_skiaui(std::string_view class_name, Props... props)
+template <typename Clazz, bool CanInstance = true, typename... Pair>
+void registration_skiaui(std::string_view class_name, Pair... props)
 {
-    registration_skiaui_impl<Clazz, CanInstance>(class_name, std::make_pair(reflect::type_name(props), props)...);
+    registration_skiaui_impl<Clazz, CanInstance>(class_name, props...);
 }
 
-template <typename Clazz, bool CanInstance = true, is_prop_t... Props>
-void registration_skiaui(Props... props)
+template <typename Clazz, bool CanInstance = true, typename... Pair>
+void registration_skiaui(Pair... props)
 {
-    registration_skiaui<Clazz, CanInstance>(reflect::type_name<Clazz>(), props...);
+    registration_skiaui<Clazz, CanInstance>(props...);
 }
 } // namespace
+
+#define P(v) std::make_pair(reflect::type_name(v), v)
 
 static struct init_meta
 {
@@ -89,12 +91,12 @@ static struct init_meta
     {
         using namespace std::literals;
 
-        registration_skiaui<window>(&window::width, &window::height);
-        registration_skiaui<view>(&view::width, &view::height);
-        registration_skiaui<view_group>(&view_group::children);
-        registration_skiaui<content_view, false>(&content_view::content);
+        registration_skiaui<window>(P(&window::width), P(&window::height));
+        registration_skiaui<view>(P(&view::width), P(&view::height));
+        registration_skiaui<view_group>(P(&view_group::children));
+        registration_skiaui<content_view, false>(P(&content_view::content));
         registration_skiaui<button>();
-        registration_skiaui<image_view>(&image_view::src);
+        registration_skiaui<image_view>(P(&image_view::src));
     }
 } init_meta_instance;
 } // namespace su
