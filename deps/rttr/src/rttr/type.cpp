@@ -365,7 +365,7 @@ array_range<method> type::get_methods(filter_items filter) const RTTR_NOEXCEPT
 property type::get_global_property(string_view name) RTTR_NOEXCEPT
 {
     auto& prop_list = detail::type_register_private::get_instance().get_global_property_storage();
-    const auto ret = prop_list.find(name);
+    const auto ret  = prop_list.find(std::string{name});
     if (ret != prop_list.end())
         return *ret;
 
@@ -377,7 +377,7 @@ property type::get_global_property(string_view name) RTTR_NOEXCEPT
 method type::get_global_method(string_view name) RTTR_NOEXCEPT
 {
     auto& meth_list = detail::type_register_private::get_instance().get_global_method_storage();
-    const auto ret = meth_list.find(name);
+    const auto ret  = meth_list.find(std::string{name});
     if (ret != meth_list.end())
         return *ret;
 
@@ -389,7 +389,7 @@ method type::get_global_method(string_view name) RTTR_NOEXCEPT
 method type::get_global_method(string_view name, const std::vector<type>& type_list) RTTR_NOEXCEPT
 {
     auto& meth_list = detail::type_register_private::get_instance().get_global_method_storage();
-    auto itr = meth_list.find(name);
+    auto itr = meth_list.find(name.to_string());
     while (itr != meth_list.end())
     {
         const auto& meth = *itr;
@@ -455,7 +455,7 @@ variant type::invoke(string_view name, instance obj, std::vector<argument> args)
 variant type::invoke(string_view name, std::vector<argument> args)
 {
     auto& meth_list = detail::type_register_private::get_instance().get_global_method_storage();
-    auto itr = meth_list.find(name);
+    auto itr = meth_list.find(name.to_string());
     while (itr != meth_list.end())
     {
         const auto& meth = *itr;

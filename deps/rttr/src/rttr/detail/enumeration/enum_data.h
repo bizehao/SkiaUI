@@ -50,7 +50,7 @@ class enum_data
         Enum_Type get_value() const     { return m_value; }
 
     private:
-        string_view m_name;
+        std::string m_name;
         Enum_Type   m_value;
 };
 

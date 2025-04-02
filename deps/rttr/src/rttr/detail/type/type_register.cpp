@@ -301,14 +301,14 @@ void type_register_private::unregister_reg_manager(registration_manager* manager
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-flat_multimap<string_view, ::rttr::method>& type_register_private::get_global_method_storage()
+flat_multimap<std::string, ::rttr::method>& type_register_private::get_global_method_storage()
 {
     return m_global_method_stroage;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-flat_multimap<string_view, ::rttr::property>& type_register_private::get_global_property_storage()
+flat_multimap<std::string, ::rttr::property>& type_register_private::get_global_property_storage()
 {
     return m_global_property_stroage;
 }
@@ -800,7 +800,7 @@ bool type_register_private::register_global_property(const property_wrapper_base
 
      auto p = detail::create_item<::rttr::property>(prop);
      get_global_properties().emplace_back(p);
-     get_global_property_storage().insert(std::move(name), std::move(p));
+     get_global_property_storage().insert(std::move(name.to_string()), std::move(p));
      return true;
 }
 
@@ -809,7 +809,7 @@ bool type_register_private::register_global_property(const property_wrapper_base
 bool type_register_private::unregister_global_property(const property_wrapper_base* prop)
 {
     auto& g_props   = get_global_property_storage();
-    auto result     = g_props.erase(prop->get_name());
+    auto result     = g_props.erase(prop->get_name().to_string());
 
     auto result2 = remove_container_item(get_global_properties(), create_item<rttr::property>(prop));
     return result && result2;
@@ -846,7 +846,7 @@ bool type_register_private::register_global_method(const method_wrapper_base* me
         return false;
 
     get_global_methods().push_back(m);
-    get_global_method_storage().insert(std::move(name), std::move(m));
+    get_global_method_storage().insert(std::move(name.to_string()), std::move(m));
     return true;
 }
 
@@ -855,7 +855,7 @@ bool type_register_private::register_global_method(const method_wrapper_base* me
 bool type_register_private::unregister_global_method(const method_wrapper_base* meth)
 {
     auto& g_meths   = get_global_method_storage();
-    auto result     = g_meths.erase(meth->get_name());
+    auto result     = g_meths.erase(meth->get_name().to_string());
 
     auto result2 = remove_container_item(get_global_methods(), create_item<rttr::method>(meth));
     return result && result2;
@@ -1108,7 +1108,7 @@ std::vector<type>& type_register_private::get_type_storage()
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-flat_map<string_view, type>& type_register_private::get_orig_name_to_id()
+flat_map<std::string, type>& type_register_private::get_orig_name_to_id()
 {
     return m_orig_name_to_id;
 }

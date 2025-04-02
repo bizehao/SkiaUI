@@ -60,7 +60,7 @@ if (${BUILD_RTTR_DYNAMIC})
                           
                           
     if(${CMAKE_VERSION} VERSION_GREATER "3.8.0") 
-        target_compile_features(rttr_core PUBLIC cxx_std_17) # at least c++11 is needed to compile RTTR
+        target_compile_features(rttr_core PUBLIC cxx_std_11) # at least c++11 is needed to compile RTTR
     endif()
                          
     target_include_directories(rttr_core PUBLIC
@@ -113,7 +113,7 @@ if (BUILD_STATIC)
                                 $<INSTALL_INTERFACE:include>)
     
     if(${CMAKE_VERSION} VERSION_GREATER "3.8.0") 
-        target_compile_features(rttr_core_lib PUBLIC cxx_std_17) # at least c++11 is needed to compile RTTR
+        target_compile_features(rttr_core_lib PUBLIC cxx_std_11) # at least c++11 is needed to compile RTTR
     endif()
     
     set_compiler_warnings(rttr_core_lib)
@@ -151,7 +151,7 @@ if (BUILD_WITH_STATIC_RUNTIME_LIBS)
                               VISIBILITY_INLINES_HIDDEN 1)
 
         if(${CMAKE_VERSION} VERSION_GREATER "3.8.0") 
-            target_compile_features(rttr_core_s PUBLIC cxx_std_17) # at least c++11 is needed to compile RTTR
+            target_compile_features(rttr_core_s PUBLIC cxx_std_11) # at least c++11 is needed to compile RTTR
         endif()
         
         set_compiler_warnings(rttr_core_s)
@@ -196,7 +196,7 @@ if (BUILD_WITH_STATIC_RUNTIME_LIBS)
         target_link_libraries(rttr_core_lib_s PRIVATE ${CMAKE_DL_LIBS})
             
         if(${CMAKE_VERSION} VERSION_GREATER "3.8.0") 
-            target_compile_features(rttr_core_lib_s PUBLIC cxx_std_17) # at least c++11 is needed to compile RTTR
+            target_compile_features(rttr_core_lib_s PUBLIC cxx_std_11) # at least c++11 is needed to compile RTTR
         endif()
     
         set_compiler_warnings(rttr_core_lib_s)

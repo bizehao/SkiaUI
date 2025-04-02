@@ -24,6 +24,6 @@ target_compile_features(SkiaUI PUBLIC cxx_std_20)
 
 target_include_directories(SkiaUI PRIVATE ./)
 
-target_link_libraries(SkiaUI PRIVATE eventpp RTTR::Core_Lib reflect::reflect fmt::fmt tinyxml2::tinyxml2)
+target_link_libraries(SkiaUI PRIVATE eventpp RTTR::Core_Lib reflect::reflect fmt::fmt tinyxml2::tinyxml2 nameof::nameof)
 
 # TODO: 如有需要，请添加测试并安装目标。

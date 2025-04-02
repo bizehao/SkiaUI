@@ -90,8 +90,8 @@ public:
     void register_custom_name(type& t, string_view custom_name);
 
     /////////////////////////////////////////////////////////////////////////////////////
-    flat_multimap<string_view, ::rttr::property>& get_global_property_storage();
-    flat_multimap<string_view, ::rttr::method>& get_global_method_storage();
+    flat_multimap<std::string, ::rttr::property>& get_global_property_storage();
+    flat_multimap<std::string, ::rttr::method>& get_global_method_storage();
     /////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -102,7 +102,7 @@ public:
 
     std::vector<type_data*>& get_type_data_storage();
     std::vector<type>& get_type_storage();
-    flat_map<string_view, type>& get_orig_name_to_id();
+    flat_map<std::string, type>& get_orig_name_to_id();
     flat_map<std::string, type, hash>& get_custom_name_to_id();
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -214,12 +214,12 @@ private:
     std::set<registration_manager*>                             m_registration_manager_list;
 
     flat_map<std::string, type, hash>                           m_custom_name_to_id;
-    flat_map<string_view, type>                                 m_orig_name_to_id;
+    flat_map<std::string, type> m_orig_name_to_id;
     std::vector<type>                                           m_type_list;
     std::vector<type_data*>                                     m_type_data_storage;
 
-    flat_multimap<string_view, ::rttr::property>                m_global_property_stroage;
-    flat_multimap<string_view, ::rttr::method>                  m_global_method_stroage;
+    flat_multimap<std::string, ::rttr::property> m_global_property_stroage;
+    flat_multimap<std::string, ::rttr::method> m_global_method_stroage;
     std::vector<::rttr::property>                               m_global_properties;
     std::vector<::rttr::method>                                 m_global_methods;
 

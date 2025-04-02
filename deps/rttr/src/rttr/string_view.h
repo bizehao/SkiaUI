@@ -33,6 +33,7 @@
 
 #include <string>
 #include <ostream>
+#include <string_view>
 
 namespace rttr
 {
@@ -95,8 +96,8 @@ class basic_string_view
         template<typename Allocator>
         basic_string_view(const std::basic_string<CharT, Traits, Allocator>& str) RTTR_NOEXCEPT;
 
+        RTTR_CONSTEXPR basic_string_view(std::basic_string_view<CharT, Traits> str) RTTR_NOEXCEPT;
 
-        RTTR_CONSTEXPR basic_string_view(std::string_view other) RTTR_NOEXCEPT;
         /*!
          * \brief Replaces the this view with that of \p other view.
          */

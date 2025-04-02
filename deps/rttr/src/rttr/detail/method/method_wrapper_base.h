@@ -96,8 +96,8 @@ class RTTR_API method_wrapper_base
         void create_signature_string() RTTR_NOEXCEPT;
 
     private:
-        string_view m_name;
-        string_view m_signature_view;
+        std::string m_name;
+        std::string m_signature_view;
         type        m_declaring_type;
         std::string m_signature;
 };

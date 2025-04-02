@@ -75,11 +75,10 @@ basic_string_view<CharT, Traits>::basic_string_view(const std::basic_string<Char
 {
 }
 
-template<typename CharT, typename Traits>
-RTTR_CONSTEXPR basic_string_view<CharT, Traits>::basic_string_view(std::string_view str) RTTR_NOEXCEPT
-:   m_data(str.data()), m_size(str.length())
+template <typename CharT, typename Traits>
+RTTR_CONSTEXPR basic_string_view<CharT, Traits>::basic_string_view(std::basic_string_view<CharT, Traits> str) RTTR_NOEXCEPT
+: m_data(str.data()), m_size(str.length())
 {
-
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

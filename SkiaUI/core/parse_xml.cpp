@@ -179,6 +179,10 @@ std::shared_ptr<window> parse_xml_handle(std::string_view path)
     auto attrs = get_attrs(root);
     rttr::type window_type = rttr::type::get<su::window>();
     auto window_obj        = window_type.create();
+    if (!window_obj)
+    {
+        return nullptr;
+    }
     handle_of_view(window_type, window_obj, attrs);
     auto window_ptr = window_obj.convert<std::shared_ptr<su::window>>();
     auto children   = handle_node(root);

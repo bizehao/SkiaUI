@@ -124,6 +124,7 @@ int main()
 	type class_type = type::get_by_name("test_class");
 	// option 1
 	variant a1 = 50;
+	//int a1 = 50;
 	bool success = class_type.set_property_value("value", obj, a1);
 	std::cout << obj.m_value << std::endl; // prints "50"
 

@@ -84,7 +84,7 @@ class RTTR_API property_wrapper_base
         void init() RTTR_NOEXCEPT;
 
     private:
-        string_view m_name;
+        std::string m_name;
         type        m_declaring_type;
 };
 

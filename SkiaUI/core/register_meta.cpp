@@ -7,8 +7,8 @@
 #include "controls/view.h"
 #include "controls/view_group.h"
 #include "helper/authoring.hpp"
-#include <reflect/reflect.hpp>
 #include <rttr/registration.h>
+#include <nameof/nameof.hpp>
 
 namespace su
 {
@@ -79,24 +79,23 @@ void registration_skiaui(std::string_view class_name, Pair... props)
 template <typename Clazz, bool CanInstance = true, typename... Pair>
 void registration_skiaui(Pair... props)
 {
-    registration_skiaui<Clazz, CanInstance>(props...);
+    registration_skiaui<Clazz, CanInstance>(static_cast<std::string_view>(nameof::nameof_short_type<Clazz>()), props...);
 }
 } // namespace
 
-#define P(v) std::make_pair(reflect::type_name(v), v)
+#define P(v) std::make_pair(static_cast<std::string_view>(NAMEOF(v)), &v)
 
 static struct init_meta
 {
     init_meta()
     {
         using namespace std::literals;
-
-        registration_skiaui<window>(P(&window::width), P(&window::height));
-        registration_skiaui<view>(P(&view::width), P(&view::height));
-        registration_skiaui<view_group>(P(&view_group::children));
-        registration_skiaui<content_view, false>(P(&content_view::content));
+        registration_skiaui<window>(P(window::width), P(window::height));
+        registration_skiaui<view>(P(view::width), P(view::height));
+        registration_skiaui<view_group>(P(view_group::children));
+        registration_skiaui<content_view, false>(P(content_view::content));
         registration_skiaui<button>();
-        registration_skiaui<image_view>(P(&image_view::src));
+        registration_skiaui<image_view>(P(image_view::src));
     }
 } init_meta_instance;
 } // namespace su

@@ -430,7 +430,7 @@ class registration::bind<detail::prop, Class_Type, A, acc_level, Visitor_List> :
 
     private:
         std::shared_ptr<detail::registration_executer> m_reg_exec;
-        string_view m_name;
+        std::string m_name;
         A           m_acc;
         std::unique_ptr<detail::property_wrapper_base> m_prop;
 
@@ -525,7 +525,7 @@ class registration::bind<detail::prop, Class_Type, A1, A2, acc_level, Visitor_Li
 
     private:
         std::shared_ptr<detail::registration_executer> m_reg_exec;
-        string_view m_name;
+        std::string m_name;
         A1          m_getter;
         A2          m_setter;
         std::unique_ptr<detail::property_wrapper_base> m_prop;
@@ -613,7 +613,7 @@ class registration::bind<detail::prop_readonly, Class_Type, A, acc_level, Visito
         }
     private:
         std::shared_ptr<detail::registration_executer> m_reg_exec;
-        string_view m_name;
+        std::string m_name;
         A           m_acc;
         std::unique_ptr<detail::property_wrapper_base> m_prop;
 };
@@ -749,7 +749,7 @@ class registration::bind<detail::meth, Class_Type, F, acc_level, Visitor_List> :
 
     private:
         std::shared_ptr<detail::registration_executer> m_reg_exec;
-        string_view m_name;
+        std::string m_name;
         F           m_func;
         std::unique_ptr<detail::method_wrapper_base> m_meth;
 };

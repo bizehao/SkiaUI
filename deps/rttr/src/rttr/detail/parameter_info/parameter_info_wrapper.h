@@ -62,7 +62,7 @@ class parameter_info_wrapper<Param_Type, Param_Index, has_param_name, Default_Ty
         uint32_t get_index() const          RTTR_NOEXCEPT   { return static_cast<uint32_t>(Param_Index); }
     private:
         const Default_Type* m_default_value;
-        string_view         m_name;
+        std::string         m_name;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ class parameter_info_wrapper<Param_Type, Param_Index, has_param_name, void> : pu
         variant get_default_value() const                   { return variant(); }
         uint32_t get_index() const          RTTR_NOEXCEPT   { return static_cast<uint32_t>(Param_Index); }
     private:
-        string_view m_name;
+        std::string m_name;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////

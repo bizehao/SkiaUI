@@ -113,7 +113,7 @@ class enumeration_wrapper : public enumeration_wrapper_base, public metadata_han
         variant get_metadata(const variant& key) const { return metadata_handler<Metadata_Count>::get_metadata(key); }
 
     private:
-        std::array< string_view, N >    m_enum_names;
+        std::array< std::string, N >    m_enum_names;
         std::array< Enum_Type, N >      m_enum_values;
         std::array< variant, N >        m_enum_variant_values;
 };
