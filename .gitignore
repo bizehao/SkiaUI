@@ -398,3 +398,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/deps/nameof/.github/workflows
+/deps/nameof/cmake/GenPkgConfig
+/deps/nameof/doc
