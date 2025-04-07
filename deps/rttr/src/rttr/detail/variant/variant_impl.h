@@ -303,7 +303,12 @@ RTTR_INLINE bool variant::convert(T& value) const
 
     const type source_type = get_type();
     const type target_type = type::get<T>();
-    if (source_type.is_wrapper() && !target_type.is_wrapper())
+    if (const auto& converter = source_type.get_type_converter(target_type))
+    {
+        const auto target_converter = static_cast<const detail::type_converter_target<T>*>(converter);
+        value                       = target_converter->convert(get_ptr(), ok);
+    }
+    else if (source_type.is_wrapper() && !target_type.is_wrapper())
     {
         variant var = extract_wrapped_value();
         return var.convert<T>(value);
@@ -323,11 +328,6 @@ RTTR_INLINE bool variant::convert(T& value) const
     else if(try_basic_type_conversion(value))
     {
         ok = true;
-    }
-    else if (const auto& converter = source_type.get_type_converter(target_type))
-    {
-        const auto target_converter = static_cast<const detail::type_converter_target<T>*>(converter);
-        value = target_converter->convert(get_ptr(), ok);
     }
     else if (target_type == type::get<std::nullptr_t>())
     {
