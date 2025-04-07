@@ -1,6 +1,7 @@
 #pragma once
 
 #include "view.h"
+#include <yoga/Yoga.h>
 
 namespace su
 {

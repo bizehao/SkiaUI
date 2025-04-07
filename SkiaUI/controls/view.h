@@ -2,9 +2,17 @@
 
 #include <rttr/type>
 #include "helper/authoring.hpp"
+#include <yoga/Yoga.h>
 
 namespace su
 {
+
+	void test() {
+	
+		YGNodeStyleSetWidth();
+        YGNodeStyleSetWidthAuto();
+        YGNodeStyleSetWidthFitContent();
+	}
 
 	class view
 	{

@@ -78,7 +78,6 @@ static std::unordered_map<std::string_view, std::string_view> get_attrs(tinyxml2
         std::string_view attrName  = attr->Name();
         std::string_view attrValue = attr->Value();
         attrs.emplace(attrName, attrValue);
-        std::cout << "Attribute: " << attrName << " = " << attrValue << std::endl;
     }
     return attrs;
 }
@@ -87,7 +86,8 @@ static std::shared_ptr<su::view> parse_node(tinyxml2::XMLElement* element)
 {
     // 获取元素名称
     std::string_view elementName = element->Name();
-    std::cout << "Element Name: " << elementName << std::endl;
+
+    std::cout << "\nElement Name: " << elementName << std::endl;
 
     auto var_t = rttr::type::get_by_name(elementName);
 
@@ -99,7 +99,6 @@ static std::shared_ptr<su::view> parse_node(tinyxml2::XMLElement* element)
 
     auto attrs = get_attrs(element);
 
-    std::cout << std::endl;
     const rttr::type class_t = rttr::type::get_by_name(elementName);
     const rttr::type view_t  = rttr::type::get<su::view>();
     if (class_t == view_t || class_t.is_derived_from(view_t))

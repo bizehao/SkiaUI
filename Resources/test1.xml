@@ -1,13 +1,13 @@
 <window width="400" height="400">
 	<view width="40" height="40">
 	</view>
-	<!--<button width="30" height="25">   
-		<image_view/>
+	<button width="30" height="25">   
+		<image_view src="./aa.png"/>
 	</button>
 	<view_group width="30" height="25">
 		<view width="40" height="40"/>
 		<view width="40" height="40"/>
 		<view width="40" height="40"/>
 		<view width="40" height="40"/>
-	</view_group>-->
+	</view_group>
 </window>

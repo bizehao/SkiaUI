@@ -1,0 +1,86 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+
+cmake_minimum_required(VERSION 3.13...3.26)
+project(yogacore)
+set(CMAKE_VERBOSE_MAKEFILE on)
+
+if(TARGET yogacore)
+    return()
+endif()
+
+include(CheckIPOSupported)
+
+set(YOGA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+add_compile_definitions($<$<CONFIG:DEBUG>:DEBUG>)
+
+if(MSVC)
+
+add_compile_options(
+    # Don't omit frame pointers (e.g. for crash dumps)
+    /Oy-
+    # "Standard C++ exception handling" (C++ stack unwinding including extern c)
+    /EHsc
+    # Enable warnings and warnings as errors
+    /W4
+    /WX
+    # Enable RTTI
+    $<$<COMPILE_LANGUAGE:CXX>:/GR>
+    # Use /O2 (Maximize Speed)
+    $<$<CONFIG:RELEASE>:/O2>)
+
+else()
+
+add_compile_options(
+    # Don't omit frame pointers (e.g. for crash dumps)
+    -fno-omit-frame-pointer
+    # Enable exception handling
+    -fexceptions
+    # Enable warnings and warnings as errors
+    -Wall
+    -Werror
+    # Enable RTTI
+    $<$<COMPILE_LANGUAGE:CXX>:-frtti>
+    # Use -O2 (prioritize speed)
+    $<$<CONFIG:RELEASE>:-O2>
+    # Enable separate sections per function/data item
+    $<$<CONFIG:RELEASE>:-ffunction-sections>
+    $<$<CONFIG:RELEASE>:-fdata-sections>)
+
+add_link_options(
+    # Discard unused sections
+    $<$<CONFIG:RELEASE>:$<$<CXX_COMPILER_ID:Clang,GNU>:-Wl,--gc-sections>>
+    $<$<CONFIG:RELEASE>:$<$<CXX_COMPILER_ID:AppleClang>:-Wl,-dead_strip>>)
+
+endif()
+
+
+file(GLOB SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/**/*.cpp)
+
+add_library(yogacore STATIC ${SOURCES})
+
+# Yoga conditionally uses <android/log> when building for Android
+if (ANDROID)
+    target_link_libraries(yogacore log)
+endif()
+
+check_ipo_supported(RESULT result)
+if(result)
+  set_target_properties(yogacore PROPERTIES
+    CMAKE_INTERPROCEDURAL_OPTIMIZATION true)
+endif()
+
+target_include_directories(yogacore
+    PUBLIC
+    $<BUILD_INTERFACE:${YOGA_ROOT}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/yoga>)
